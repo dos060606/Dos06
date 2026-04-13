@@ -1,58 +1,128 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
 body {
-    font-family: Arial, sans-serif;
-    background: #f4f6f8;
     margin: 0;
-}
-
-header {
-    background: #1e1e2f;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #0f172a, #1e293b);
     color: white;
-    text-align: center;
-    padding: 20px;
 }
 
+/* HEADER */
+header {
+    text-align: center;
+    padding: 40px 20px;
+    font-size: 24px;
+    font-weight: 600;
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(10px);
+}
+
+/* CONTAINER */
 .container {
     width: 90%;
-    margin: 20px auto;
+    margin: auto;
 }
 
+/* CARDS */
 .cards {
     display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
+    gap: 25px;
     justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 40px;
 }
 
 .card {
-    background: white;
-    padding: 15px;
-    border-radius: 12px;
-    width: 280px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    background: rgba(255,255,255,0.05);
+    border-radius: 20px;
+    padding: 20px;
+    width: 300px;
+    backdrop-filter: blur(15px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
     transition: 0.3s;
+    position: relative;
+    overflow: hidden;
+}
+
+/* glow effect */
+.card::before {
+    content: "";
+    position: absolute;
+    width: 150%;
+    height: 150%;
+    background: linear-gradient(45deg, #00f5ff, #ff00ff, #00ff88);
+    top: -50%;
+    left: -50%;
+    opacity: 0.1;
+    transition: 0.5s;
+}
+
+.card:hover::before {
+    opacity: 0.3;
+    transform: rotate(20deg);
 }
 
 .card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-10px) scale(1.03);
 }
 
+/* TEXT */
 .card h3 {
     margin-top: 0;
+    font-weight: 600;
 }
 
+.card p {
+    font-size: 14px;
+    color: #cbd5e1;
+}
+
+.card ul {
+    padding-left: 20px;
+}
+
+/* BUTTON */
 .card a {
-    color: #007BFF;
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 15px;
+    border-radius: 10px;
+    background: linear-gradient(45deg, #00f5ff, #ff00ff);
+    color: white;
     text-decoration: none;
+    font-size: 14px;
+    transition: 0.3s;
 }
 
 .card a:hover {
-    text-decoration: underline;
+    transform: scale(1.1);
 }
 
+/* EXPERIENCE BLOCK */
 .experience {
-    background: white;
-    margin-top: 30px;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    margin-top: 50px;
+    background: rgba(255,255,255,0.05);
+    padding: 25px;
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
 }
+
+.experience h2 {
+    margin-top: 0;
+}
+
+/* ANIMATION */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.card {
+    animation: fadeIn 0.8s ease forwards;
