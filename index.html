@@ -1,64 +1,16 @@
 <!DOCTYPE html>
 <html lang="kk">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI Tools for Developers</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Tools for Developers</title>
+    <link rel="stylesheet" href="style.css">
 
 <style>
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #f4f6f8;
-}
-
-/* HEADER */
-header {
-    background: #00a86b;
-    color: white;
-    text-align: center;
-    padding: 20px;
-}
-
-/* CARDS */
-.container {
-    display: flex;
-    justify-content: center;
-}
-
-.cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 15px;
-    width: 90%;
-    margin-top: 20px;
-}
-
-.card {
-    background: white;
-    padding: 15px;
-    border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-}
-
-/* CHAT BUTTON */
-#chatToggle {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background: #00a86b;
-    color: white;
-    padding: 15px;
-    border-radius: 50%;
-    font-size: 20px;
-    cursor: pointer;
-    box-shadow: 0 0 10px rgba(0,0,0,0.2);
-}
-
-/* CHATBOX */
+/* CHATBOT STYLE */
 #chatbox {
     position: fixed;
-    bottom: 80px;
+    bottom: 20px;
     right: 20px;
     width: 300px;
     height: 400px;
@@ -68,13 +20,9 @@ header {
     flex-direction: column;
     box-shadow: 0 0 10px rgba(0,0,0,0.2);
     overflow: hidden;
+    font-size: 14px;
 }
 
-.hidden {
-    display: none;
-}
-
-/* MESSAGES */
 #messages {
     flex: 1;
     padding: 10px;
@@ -83,113 +31,98 @@ header {
 
 .msg {
     margin: 5px 0;
-    padding: 6px 10px;
-    border-radius: 8px;
-    max-width: 80%;
-    font-size: 14px;
 }
 
 .user {
-    background: #00a86b;
-    color: white;
-    margin-left: auto;
+    text-align: right;
+    color: blue;
 }
 
 .bot {
-    background: #eee;
+    text-align: left;
+    color: green;
 }
 
-/* INPUT */
 #inputArea {
     display: flex;
-    border-top: 1px solid #ddd;
 }
 
 #inputArea input {
     flex: 1;
     padding: 8px;
     border: none;
-    outline: none;
 }
 
 #inputArea button {
     padding: 8px;
     border: none;
-    background: #00a86b;
+    background: green;
     color: white;
-    cursor: pointer;
 }
 
-/* QUICK BUTTONS */
 .quick-buttons {
     padding: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
 }
 
 .quick-buttons button {
     background: #eee;
     border: none;
-    padding: 5px 8px;
-    margin: 2px;
+    padding: 5px;
     cursor: pointer;
-    border-radius: 5px;
-}
-
-.quick-buttons button:hover {
-    background: #00a86b;
-    color: white;
 }
 </style>
 
 </head>
-
 <body>
 
 <header>
-    <h1>🤖 Әзірлеушіге арналған AI Tools</h1>
-    <p>Заманауи AI құралдар</p>
+    <h1>🤖 Әзірлеушіге арналған ЖИ құралдары</h1>
+    <p>Заманауи developer-лер қолданатын AI құралдар</p>
 </header>
 
 <div class="container">
-<section class="cards">
 
-    <div class="card">
-        <h3>💡 GitHub Copilot</h3>
-        <p>Код жазуға көмектесетін AI көмекші.</p>
-    </div>
+    <section class="cards">
 
-    <div class="card">
-        <h3>⚡ ChatGPT</h3>
-        <p>Сұраққа жауап беретін AI.</p>
-    </div>
+        <div class="card">
+            <h3>💡 GitHub Copilot</h3>
+            <p>Код жазуға көмектесетін AI көмекші.</p>
+        </div>
 
-    <div class="card">
-        <h3>🧠 Claude</h3>
-        <p>Мәтін және код талдайтын AI.</p>
-    </div>
+        <div class="card">
+            <h3>⚡ ChatGPT</h3>
+            <p>Сұраққа жауап беретін және код түсіндіретін AI.</p>
+        </div>
 
-    <div class="card">
-        <h3>🌐 Google Gemini</h3>
-        <p>Google AI жүйесі.</p>
-    </div>
+        <div class="card">
+            <h3>🧠 Claude</h3>
+            <p>Үлкен мәтін мен кодты талдайтын AI.</p>
+        </div>
 
-    <div class="card">
-        <h3>🪟 Microsoft Copilot</h3>
-        <p>Microsoft ассистенті.</p>
-    </div>
+        <div class="card">
+            <h3>🌐 Google Gemini</h3>
+            <p>Google-дің AI жүйесі.</p>
+        </div>
 
-    <div class="card">
-        <h3>🔎 Perplexity AI</h3>
-        <p>Smart search AI.</p>
-    </div>
+        <div class="card">
+            <h3>🪟 Microsoft Copilot</h3>
+            <p>Microsoft ассистенті.</p>
+        </div>
 
-</section>
+        <div class="card">
+            <h3>🔎 Perplexity AI</h3>
+            <p>Smart search AI.</p>
+        </div>
+
+    </section>
+
 </div>
 
-<!-- 🔘 CHAT BUTTON -->
-<div id="chatToggle" onclick="toggleChat()">💬</div>
-
-<!-- 💬 CHATBOX -->
-<div id="chatbox" class="hidden">
+<!-- 🔥 CHATBOT -->
+<div id="chatbox">
 
     <div id="messages"></div>
 
@@ -208,34 +141,27 @@ header {
 </div>
 
 <script>
-function toggleChat() {
-    document.getElementById("chatbox").classList.toggle("hidden");
-}
-
 function addMessage(text, sender) {
     let msg = document.createElement("div");
     msg.className = "msg " + sender;
     msg.innerText = text;
     document.getElementById("messages").appendChild(msg);
-
-    document.getElementById("messages").scrollTop =
-        document.getElementById("messages").scrollHeight;
 }
 
 function botReply(input) {
     input = input.toLowerCase();
 
     if (input === "/help") {
-        return "Командалар: Сәлем, ChatGPT, Copilot";
+        return "Командалар: ChatGPT, Copilot, Сәлем";
     }
     else if (input.includes("сәлем")) {
-        return "Сәлем! 👋 Қалай көмектесе аламын?";
+        return "Сәлем! 👋 Қалай көмектесем?";
     }
     else if (input.includes("chatgpt")) {
-        return "ChatGPT — AI чатбот, сұрақтарға жауап береді 🤖";
+        return "ChatGPT — AI чат бот, код жазуға және сұрақтарға жауап береді.";
     }
     else if (input.includes("copilot")) {
-        return "GitHub Copilot — код жазуға көмектеседі 💻";
+        return "GitHub Copilot — код жазуға көмектесетін AI.";
     }
     else {
         return "Түсінбедім 😅";
@@ -246,13 +172,12 @@ function sendMessage() {
     let input = document.getElementById("userInput");
     let text = input.value;
 
-    if (!text.trim()) return;
+    if (text.trim() === "") return;
 
     addMessage(text, "user");
 
-    setTimeout(() => {
-        addMessage(botReply(text), "bot");
-    }, 400);
+    let reply = botReply(text);
+    setTimeout(() => addMessage(reply, "bot"), 500);
 
     input.value = "";
 }
@@ -260,9 +185,8 @@ function sendMessage() {
 function sendQuick(text) {
     addMessage(text, "user");
 
-    setTimeout(() => {
-        addMessage(botReply(text), "bot");
-    }, 400);
+    let reply = botReply(text);
+    setTimeout(() => addMessage(reply, "bot"), 500);
 }
 </script>
 
