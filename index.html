@@ -4,77 +4,173 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Tools for Developers</title>
-    <link rel="stylesheet" href="style.css">
+    
+    <style>
+        /* НЕГІЗГІ ДИЗАЙН */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
 
-<style>
-/* CHATBOT STYLE */
-#chatbox {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    width: 300px;
-    height: 400px;
-    background: white;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    box-shadow: 0 0 10px rgba(0,0,0,0.2);
-    overflow: hidden;
-    font-size: 14px;
-}
+        header { text-align: center; margin-bottom: 30px; }
 
-#messages {
-    flex: 1;
-    padding: 10px;
-    overflow-y: auto;
-}
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            width: 100%;
+            max-width: 1000px;
+        }
 
-.msg {
-    margin: 5px 0;
-}
+        .card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            transition: transform 0.3s ease;
+        }
 
-.user {
-    text-align: right;
-    color: blue;
-}
+        .card:hover { transform: translateY(-5px); }
 
-.bot {
-    text-align: left;
-    color: green;
-}
+        /* ЧАТБОТТЫҢ СЫРТҚЫ БАТЫРМАСЫ */
+        #chat-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background: #2563eb;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
 
-#inputArea {
-    display: flex;
-}
+        #chat-toggle:hover { transform: scale(1.1); }
 
-#inputArea input {
-    flex: 1;
-    padding: 8px;
-    border: none;
-}
+        /* ЧАТБОТ ТЕРЕЗЕСІ */
+        #chatbox {
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            width: 350px;
+            height: 500px;
+            background: white;
+            border-radius: 20px;
+            display: none; /* Жасырын күйде басталады */
+            flex-direction: column;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            overflow: hidden;
+            z-index: 1000;
+            animation: slideUp 0.3s ease-out;
+        }
 
-#inputArea button {
-    padding: 8px;
-    border: none;
-    background: green;
-    color: white;
-}
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-.quick-buttons {
-    padding: 5px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 5px;
-}
+        #chat-header {
+            background: #2563eb;
+            color: white;
+            padding: 15px;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-.quick-buttons button {
-    background: #eee;
-    border: none;
-    padding: 5px;
-    cursor: pointer;
-}
-</style>
+        #messages {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            background: #f9fafb;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
 
+        .msg {
+            max-width: 80%;
+            padding: 10px 15px;
+            border-radius: 15px;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        .user {
+            align-self: flex-end;
+            background: #2563eb;
+            color: white;
+            border-bottom-right-radius: 2px;
+        }
+
+        .bot {
+            align-self: flex-start;
+            background: #e5e7eb;
+            color: #1f2937;
+            border-bottom-left-radius: 2px;
+        }
+
+        .quick-buttons {
+            padding: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            border-top: 1px solid #eee;
+        }
+
+        .quick-buttons button {
+            background: #f3f4f6;
+            border: 1px solid #ddd;
+            padding: 6px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: background 0.2s;
+        }
+
+        .quick-buttons button:hover { background: #e5e7eb; }
+
+        #inputArea {
+            display: flex;
+            padding: 10px;
+            background: white;
+            border-top: 1px solid #eee;
+        }
+
+        #inputArea input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            outline: none;
+            margin-right: 5px;
+        }
+
+        #inputArea button {
+            background: #2563eb;
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
 
@@ -83,111 +179,99 @@
     <p>Заманауи developer-лер қолданатын AI құралдар</p>
 </header>
 
-<div class="container">
-
-    <section class="cards">
-
-        <div class="card">
-            <h3>💡 GitHub Copilot</h3>
-            <p>Код жазуға көмектесетін AI көмекші.</p>
-        </div>
-
-        <div class="card">
-            <h3>⚡ ChatGPT</h3>
-            <p>Сұраққа жауап беретін және код түсіндіретін AI.</p>
-        </div>
-
-        <div class="card">
-            <h3>🧠 Claude</h3>
-            <p>Үлкен мәтін мен кодты талдайтын AI.</p>
-        </div>
-
-        <div class="card">
-            <h3>🌐 Google Gemini</h3>
-            <p>Google-дің AI жүйесі.</p>
-        </div>
-
-        <div class="card">
-            <h3>🪟 Microsoft Copilot</h3>
-            <p>Microsoft ассистенті.</p>
-        </div>
-
-        <div class="card">
-            <h3>🔎 Perplexity AI</h3>
-            <p>Smart search AI.</p>
-        </div>
-
-    </section>
-
+<div class="cards">
+    <div class="card"><h3>💡 GitHub Copilot</h3><p>Код жазуға көмектесетін AI көмекші.</p></div>
+    <div class="card"><h3>⚡ ChatGPT</h3><p>Сұраққа жауап беретін және код түсіндіретін AI.</p></div>
+    <div class="card"><h3>🧠 Claude</h3><p>Үлкен мәтін мен кодты талдайтын AI.</p></div>
+    <div class="card"><h3>🌐 Google Gemini</h3><p>Google-дің AI жүйесі.</p></div>
+    <div class="card"><h3>🪟 Microsoft Copilot</h3><p>Microsoft ассистенті.</p></div>
+    <div class="card"><h3>🔎 Perplexity AI</h3><p>Smart search AI.</p></div>
 </div>
 
-<!-- 🔥 CHATBOT -->
-<div id="chatbox">
+<div id="chat-toggle" onclick="toggleChat()">💬</div>
 
-    <div id="messages"></div>
+<div id="chatbox">
+    <div id="chat-header">
+        <span>AI Assistant</span>
+        <span style="cursor:pointer" onclick="toggleChat()">✖</span>
+    </div>
+
+    <div id="messages">
+        <div class="msg bot">Сәлем! 👋 Қалай көмектесе аламын?</div>
+    </div>
 
     <div class="quick-buttons">
-        <button onclick="sendQuick('Сәлем')">Сәлем</button>
         <button onclick="sendQuick('ChatGPT не?')">ChatGPT</button>
         <button onclick="sendQuick('Copilot не?')">Copilot</button>
+        <button onclick="sendQuick('Gemini туралы')">Gemini</button>
         <button onclick="sendQuick('/help')">Help</button>
     </div>
 
     <div id="inputArea">
-        <input type="text" id="userInput" placeholder="Сұрақ жаз...">
+        <input type="text" id="userInput" placeholder="Сұрақ жаз..." onkeypress="handleKeyPress(event)">
         <button onclick="sendMessage()">➤</button>
     </div>
-
 </div>
 
 <script>
-function addMessage(text, sender) {
-    let msg = document.createElement("div");
-    msg.className = "msg " + sender;
-    msg.innerText = text;
-    document.getElementById("messages").appendChild(msg);
-}
-
-function botReply(input) {
-    input = input.toLowerCase();
-
-    if (input === "/help") {
-        return "Командалар: ChatGPT, Copilot, Сәлем";
+    // Чатты ашу/жабу функциясы
+    function toggleChat() {
+        const chatbox = document.getElementById("chatbox");
+        const toggleBtn = document.getElementById("chat-toggle");
+        
+        if (chatbox.style.display === "flex") {
+            chatbox.style.display = "none";
+            toggleBtn.innerText = "💬";
+        } else {
+            chatbox.style.display = "flex";
+            toggleBtn.innerText = "↓";
+        }
     }
-    else if (input.includes("сәлем")) {
-        return "Сәлем! 👋 Қалай көмектесем?";
+
+    function handleKeyPress(e) {
+        if (e.key === "Enter") sendMessage();
     }
-    else if (input.includes("chatgpt")) {
-        return "ChatGPT — AI чат бот, код жазуға және сұрақтарға жауап береді.";
+
+    function addMessage(text, sender) {
+        let msg = document.createElement("div");
+        msg.className = "msg " + sender;
+        msg.innerText = text;
+        const messagesDiv = document.getElementById("messages");
+        messagesDiv.appendChild(msg);
+        messagesDiv.scrollTop = messagesDiv.scrollHeight;
     }
-    else if (input.includes("copilot")) {
-        return "GitHub Copilot — код жазуға көмектесетін AI.";
+
+    function botReply(input) {
+        input = input.toLowerCase();
+        if (input === "/help") return "Командалар: ChatGPT, Copilot, Gemini, Сәлем";
+        if (input.includes("сәлем")) return "Сәлем! 👋 Жұмысыңа сәттілік!";
+        if (input.includes("chatgpt")) return "ChatGPT — мәтінмен және кодпен жұмыс істейтін ең танымал AI.";
+        if (input.includes("copilot")) return "GitHub Copilot — IDE ішінде кодты автоматты жазатын құрал.";
+        if (input.includes("gemini")) return "Google Gemini — Google-дің ең қуатты мультимодальді моделі.";
+        return "Кешіріңіз, түсінбедім. Басқаша сұрап көріңізші 😅";
     }
-    else {
-        return "Түсінбедім 😅";
+
+    function sendMessage() {
+        let input = document.getElementById("userInput");
+        let text = input.value.trim();
+        if (text === "") return;
+
+        addMessage(text, "user");
+        input.value = "";
+
+        setTimeout(() => {
+            let reply = botReply(text);
+            addMessage(reply, "bot");
+        }, 600);
     }
-}
 
-function sendMessage() {
-    let input = document.getElementById("userInput");
-    let text = input.value;
-
-    if (text.trim() === "") return;
-
-    addMessage(text, "user");
-
-    let reply = botReply(text);
-    setTimeout(() => addMessage(reply, "bot"), 500);
-
-    input.value = "";
-}
-
-function sendQuick(text) {
-    addMessage(text, "user");
-
-    let reply = botReply(text);
-    setTimeout(() => addMessage(reply, "bot"), 500);
-}
+    function sendQuick(text) {
+        addMessage(text, "user");
+        setTimeout(() => {
+            let reply = botReply(text);
+            addMessage(reply, "bot");
+        }, 600);
+    }
 </script>
 
 </body>
